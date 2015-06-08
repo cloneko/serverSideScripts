@@ -31,7 +31,7 @@ Lesson1 プログラムって何よ?
 print("1の次は2\n"); // へへーい
 print("2の次は3\n"); // へへーい
 print("3の次は?\n"); // うーっ
-print("ふぉー!\n");
+print("4!ふぉー!\n");
 ````
 
 #### [MECE](http://ja.wikipedia.org/wiki/MECE) (重複なく・漏れなく)
