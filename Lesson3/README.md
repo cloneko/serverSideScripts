@@ -17,7 +17,7 @@ Lesson3 それっぽいプログラム - ロバのみみblog -
 
 そして、出力結果は多分[output.html](output.html)のようなHTMLであればそれっぽい感じです。
 
-というわでPHPでどうやってoutput.htmlのようなHTMLを作るのでしょうか…?
+というわけでPHPでどうやってoutput.htmlのようなHTMLを作るのでしょうか…?
 
 やらないといけないことは多分
 
@@ -34,21 +34,21 @@ Lesson3 それっぽいプログラム - ロバのみみblog -
 [input.html](input.html)の中に
 
 ```
-<form action="blog.php" method="POST">
-  <label for="name">お名前</label>
-  <input type="text" id="name">
-  <label for="article">記事本文</label>
-  <text id="article"></text>
-  <input type="submit">
+<form action='blog.php' method='POST'>
+  <label for='name'>お名前</label>
+  <input type='text' id='name'>
+  <label for='article'>記事本文</label>
+  <textarea id='article'></textarea>
+  <input type='submit'>
 </form>
 ```
 
-と書かれた部分があります。この中の`<form action="**blog.php**"``と書かれた部分が
+と書かれた部分があります。この中の`<form action='blog.php'`と書かれた部分が
 「送信ボタン」を押した時に入力された情報を受けとるプログラムになります。
 
-あとは`<input type="text" id="name">`のidのところがPHPで受けとる時に「何のデータ」かを
+あとは`<input type='text' id='name'>`のidのところがPHPで受けとる時に「何のデータ」かを
 判別する時に判断材料になるものです。今回の例だと「name」という名前のデータとPHPは判断してくれます。
-あと`<text id="article"></text>`の部分で「article」という名前のデータをPHPは受けとることができます。
+あと`<textarea id='article'></textarea>`の部分で「article」という名前のデータをPHPは受けとることができます。
 
 ### PHPでデータを受けとる
 
@@ -72,22 +72,71 @@ print($_POST['name']);
 というプログラムを書けばそのまま表示されます。…ということは…
 
 ```
-print("<!DOCTYPE html>");
-print("<html>");
-print("  <head>");
-print("    <meta name="charset" content="UTF-8">");
-print("    <title>ロバのみみblog 表示画面</title>");
-print("  </head>");
-print("  <body>");
-print("    <h1>ロバのみみblog 表示画面</h1>");
-print("    <h2>投稿者</h2>");
-print("    <p>" . $_POST['name'] ."</p>");
-print("    <h2>本文</h2>");
-print("    <p>");
+<?php
+print('<!DOCTYPE html>');
+print('<html>');
+print('  <head>');
+print('    <meta name="charset" content="UTF-8">');
+print('    <title>ロバのみみblog 表示画面</title>');
+print('  </head>');
+print('  <body>');
+print('    <h1>ロバのみみblog 表示画面</h1>');
+print('    <h2>投稿者</h2>');
+print('    <p>' . $_POST['name'] .'</p>');
+print('    <h2>本文</h2>');
+print('    <p>');
 print($_POST['article']);
-print("    </p>");
-print("  </body>");
-print("</html>");
+print('    </p>');
+print('  </body>');
+print('</html>');
 ```
 
 と書けばOK!です!まずはやってみましょう!
+
+できた!すごい!!!!
+
+めんどくせー!
+-----------------------------
+
+なんだこれ、HTML修正しようと思ったらPHP変更しないといけないんかい!!!
+
+ちょっとHTMLの構造(divとか)イジろうものならprint書きなおし…ってそんな使いづらいわ!!!!1
+
+### そんな時のテンプレートエンジン
+
+そんな時に使用するのが**テンプレートエンジン**。これを使うと超便利。
+
+#### テンプレートエンジンって?
+
+[Lesson1](../Lesson1/)あたりでプログラムの基本は「入力 → 処理 → 出力」と進んでいくと説明しました。
+入力と処理はしかたないのですが、「出力」の際になんでもプログラムに書いてしまうと、
+変更とかが大変だったり、デザイナーさんとプログラマーの作業分担が大変だったりします。
+
+そこで、「どんな風に表示したい!」というものを「テンプレート」という形で別に作っておき、
+プログラマーはそのテンプレートにデータをはめ込むだけ!というようなものができる仕組みがあると
+プログラマーもデザイナーも楽になります。
+
+こんな風にテンプレートを使えるようにしくみを「テンプレートエンジン」と言います。
+
+さっきのprintてんこもりのPHPファイルを表示の処理とテンプレートに分離してみます。
+
+テンプレートは[こちら](output.tpl)、プログラムは[こちら](smarty.php)。
+そして入力のinput.htmlはsmart.phpにデータを送信するように
+
+```
+<form action="blog.php" method="POST">
+```
+を
+```
+<form action="smarty.php" method="POST">
+```
+に書き換えます。
+
+実行結果は同じですが、プログラムを書く人の立場、
+デザイナー(コーディングする人)の立場で見た場合、どっちが楽でしょうか?
+
+そうだよね。テンプレートエンジン使ったほうが楽だよね(強制);
+
+というわけで、今後はテンプレートエンジンを使ってプログラムを書いていきましょう。
+
+そして、気付いたら「ロバのみみblog」は完成してました。やったね!
