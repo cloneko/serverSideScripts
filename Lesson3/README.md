@@ -33,7 +33,7 @@ Lesson3 それっぽいプログラム - ロバのみみblog -
 
 [input.html](input.html)の中に
 
-```
+```html
 <form action='blog.php' method='POST'>
   <label for='name'>お名前</label>
   <input type='text' id='name'>
@@ -65,13 +65,13 @@ nameという名前のデータは`$_POST['name']`に、articleという名前�
 
 ということは、そのまま
 
-```
+```php
 print($_POST['name']);
 ```
 
 というプログラムを書けばそのまま表示されます。…ということは…
 
-```
+```PHP
 <?php
 print('<!DOCTYPE html>');
 print('<html>');
@@ -123,11 +123,11 @@ print('</html>');
 テンプレートは[こちら](output.tpl)、プログラムは[こちら](smarty.php)。
 そして入力のinput.htmlはsmart.phpにデータを送信するように
 
-```
+```html
 <form action="blog.php" method="POST">
 ```
 を
-```
+```html
 <form action="smarty.php" method="POST">
 ```
 に書き換えます。
