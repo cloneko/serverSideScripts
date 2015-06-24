@@ -120,7 +120,7 @@ print('</html>');
 
 さっきのprintてんこもりのPHPファイルを表示の処理とテンプレートに分離してみます。
 
-テンプレートは[こちら](tempaltes/output.tpl)、プログラムは[こちら](twig.php)。
+テンプレートは[こちら](templates/output.tpl)、プログラムは[こちら](twig.php)。
 そして入力のinput.htmlはtwig.phpにデータを送信するように
 
 ```html
