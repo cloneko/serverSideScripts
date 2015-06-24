@@ -25,32 +25,10 @@ Lesson4 もっとそれっぽいプログラム - にわとりblog -
 
 これらを便利にやってくれる仕組みのことを **データベース** と言います。
 
-XAMPPをインストールしている段階で「MySQL」というデータベースソフトがインストールされていますが、
-今回は **MongoDB** というデータベースソフトを使用します。
+XAMPPをインストールしている段階で「MySQL」というデータベースソフトがインストールされているので
+それを使用します。
 
-MongoDBのインストール
------------------------------------
+データを永続的に保存するハコを作る
+------------------------------------
 
-### Mac編
-
-#### PHPからMongoDBを使えるようにする
-
-http://php.net/manual/ja/mongo.installation.php
-
-```
-echo extension=mongo.so >> /Applications/XAMPP/xamppfiles/etc/php.ini
-```
-
-終わったらXAMPPの画面からApacheを再起動してください。
-
-#### MongoDBをインストールする
-
-```
-brew install mongodb
-ln -sfv /usr/local/opt/mongodb/*.plist ~/Library/LaunchAgents
-launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist
-```
-
-### Ubuntu編
-
-WIP
+MySQLでは *テーブル* と言う入れ物に

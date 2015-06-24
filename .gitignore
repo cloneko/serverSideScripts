@@ -1,4 +1,4 @@
 composer.lock
 composer.phar
 vendor/
-Lesson3/template_c/*
+Lesson3/cache/*

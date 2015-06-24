@@ -120,15 +120,15 @@ print('</html>');
 
 さっきのprintてんこもりのPHPファイルを表示の処理とテンプレートに分離してみます。
 
-テンプレートは[こちら](output.tpl)、プログラムは[こちら](smarty.php)。
-そして入力のinput.htmlはsmart.phpにデータを送信するように
+テンプレートは[こちら](tempaltes/output.tpl)、プログラムは[こちら](twig.php)。
+そして入力のinput.htmlはtwig.phpにデータを送信するように
 
 ```html
 <form action="blog.php" method="POST">
 ```
 を
 ```html
-<form action="smarty.php" method="POST">
+<form action="twig.php" method="POST">
 ```
 に書き換えます。
 

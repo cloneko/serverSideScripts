@@ -1,6 +1,6 @@
 {
   "require": {
-    "smarty/smarty": "dev-trunk"
+    "twig/twig": "1.*"
   }
 }
 
