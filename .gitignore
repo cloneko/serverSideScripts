@@ -1,4 +1,5 @@
 composer.lock
 composer.phar
 vendor/
-Lesson3/cache/*
+Lesson[0-9]/cache/*
+.DS_Store
