@@ -10,7 +10,24 @@ $twig = new Twig_Environment($loader, array(
 ));
 
 
-// データを追加してみる
+// データを追加してみる…前にデータベースの設定いろいろやる。こ
+// この辺はおまじないだと思ってもらって大丈夫です。
+// Ref: https://github.com/illuminate/database
+
+use Illuminate¥Database¥Cupsule¥Manager as Capsule;
+$capsule = new Capsule;
+
+$capsule->addConnection([
+    'driver'    => 'mysql',
+    'host'      => 'localhost',
+    'database'  => 'blog',
+    'username'  => 'root',
+    'password'  => 'password',
+    'charset'   => 'utf8',
+    'collation' => 'utf8_unicode_ci',
+    'prefix'    => '',
+]);
+
 
 
 
