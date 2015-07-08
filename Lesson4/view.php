@@ -9,27 +9,30 @@ $twig = new Twig_Environment($loader, array(
     'cache' => 'cache'
 ));
 
-
 // データを追加してみる…前にデータベースの設定いろいろやる。こ
 // この辺はおまじないだと思ってもらって大丈夫です。
 // Ref: https://github.com/illuminate/database
 
-use Illuminate¥Database¥Cupsule¥Manager as Capsule;
+use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Container\Container;
 $capsule = new Capsule;
-
+$capsule->setEventDispatcher(new Dispatcher(new Container));
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
 $capsule->addConnection([
     'driver'    => 'mysql',
     'host'      => 'localhost',
     'database'  => 'blog',
     'username'  => 'root',
-    'password'  => 'password',
+    'password'  => '',
     'charset'   => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix'    => '',
 ]);
 
-
-
+$data = Capsule::table('articles')->get();
+//print_r($data);
 
 // templatesディレクトリにある *output.tpl* の {{article}}と{{name}}に受け取ったデータを嵌め込んで表示する
-print($twig->render('output.tpl',array('article'=>$_POST['article'],'name'=> $_POST['name'])));
+print($twig->render('output.tpl',array('article'=>$data[0]['article'],'name'=> $data[0]['author'],'create_date'=>$data[0]['create_date'])));

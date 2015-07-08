@@ -93,12 +93,48 @@ idはダブっちゃ困るのでこのA_Iを使用して自動的に増やして
 
 ### SQLで実行する場合
 
-WIP
-
 データを入れてみよう
 ------------------------------
 
 ハコを作ったので、データを入れてみましょう。
+通常データを入れる時にはSQLというものを使用してCRUDなことをします。
 
-通常データを入れる時にはSQLというものを使用してCRUDなことをするのですが、
-それを覚えるのもちょっと大変なので、別の方法を使用してデータを入れていきます。
+教科書151ページに書いてある「レコードを挿入する「INSERT INTO」」という部分にデータを挿入する方法が書いてあります。
+
+```
+INSERT INTO ハコの名前 (列の名前1,列の名前2,...) VALUES (列の名前1に入れるデータ,列の名前2に入れるデータ,...)
+```
+
+という記述方法を使用するとデータを入れることができます。
+
+詳細は[db.php](db.php)を参考に実際に受け取ったデータをハコに入れてみましょう。
+
+最初の
+```
+use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Container\Container;
+$capsule = new Capsule;
+$capsule->setEventDispatcher(new Dispatcher(new Container));
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
+$capsule->addConnection([
+    'driver'    => 'mysql',
+    'host'      => 'localhost',
+    'database'  => 'blog',
+    'username'  => 'root',
+    'password'  => '',
+    'charset'   => 'utf8',
+    'collation' => 'utf8_unicode_ci',
+    'prefix'    => '',
+]);
+```
+の部分はデータベースに接続するための **おまじない** だと思っていただければいいかと思います。
+
+実際にハコにデータを入れている部分は
+```
+$capsule::insert('INSERT INTO articles
+  (article,author,create_date,update_date) VALUES (?,?,?,?)',[$_POST['article'],$_POST['name'],$now,$now]);
+```
+です。
+なぜかデータを入れるVALUESのところが ``VALUES (?,?,?,?)`` になっています。
