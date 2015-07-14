@@ -3,3 +3,4 @@ composer.phar
 vendor/
 Lesson[0-9]/cache/*
 .DS_Store
+tmp
