@@ -1,6 +1,5 @@
 {
   "require": {
     "twig/twig": "1.*",
-    "illuminate/database": "4.0.*"
   }
 }
