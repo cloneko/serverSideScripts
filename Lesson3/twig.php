@@ -10,4 +10,9 @@ $twig = new Twig_Environment($loader, array(
 ));
 
 // templatesディレクトリにある *output.tpl* の {{article}}と{{name}}に受け取ったデータを嵌め込んで表示する
-print($twig->render('output.tpl',array('article'=>$_POST['article'],'name'=> $_POST['name'])));
+print($twig->render('output.tpl',
+  array(
+    'article'=>$_POST['article'],
+    'name'=> $_POST['name'])
+  )
+);
