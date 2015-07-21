@@ -10,7 +10,7 @@
     <p>{{name}}</p>
     <h2>本文</h2>
     <p>
-      {{article}}
+      {{article|nl2br}}
     </p>
   </body>
 </html>
