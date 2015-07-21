@@ -107,34 +107,92 @@ INSERT INTO ハコの名前 (列の名前1,列の名前2,...) VALUES (列の名�
 
 という記述方法を使用するとデータを入れることができます。
 
-詳細は[db.php](db.php)を参考に実際に受け取ったデータをハコに入れてみましょう。
+詳細は[add.php](add.php)を参考に実際に受け取ったデータをハコに入れてみましょう。
 
 最初の
-```
-use Illuminate\Database\Capsule\Manager as Capsule;
-use Illuminate\Events\Dispatcher;
-use Illuminate\Container\Container;
-$capsule = new Capsule;
-$capsule->setEventDispatcher(new Dispatcher(new Container));
-$capsule->setAsGlobal();
-$capsule->bootEloquent();
-$capsule->addConnection([
-    'driver'    => 'mysql',
-    'host'      => 'localhost',
-    'database'  => 'blog',
-    'username'  => 'root',
-    'password'  => '',
-    'charset'   => 'utf8',
-    'collation' => 'utf8_unicode_ci',
-    'prefix'    => '',
-]);
+```php
+// データを追加してみる…前にデータベースの設定いろいろやる。こ
+$host = 'localhost';
+$dbname = 'blog';
+$charset = 'utf8';
+$user = 'root';
+$password = '';
+$driver = 'mysql';
+$connection = sprintf("%s:host=%s;dbname=%s;charset=%s",$driver,$host,$dbname,$charset);
+$dbh = new PDO($connection,$user,$password);
 ```
 の部分はデータベースに接続するための **おまじない** だと思っていただければいいかと思います。
 
 実際にハコにデータを入れている部分は
+```php
+$now = date('Y-m-d H:i:s'); // 投稿時間を取得している。
+
+$query = 'INSERT INTO articles(article,author,create_date,update_date)
+ VALUES (:article,:author,:create_date,:update_date)';
+// SQLが実行可能な状態にしておく
+$stmt = $dbh->prepare($query);
+
+// valuesのそれぞれの場所に値をセットしていく。PDO::PARAM_STRはそれが"文字"だよーっていう意味
+// 整数のデータ入れたい時はPDO::PARAM_INTって入れてね。
+$stmt->bindParam(':article', $_POST['article'],PDO::PARAM_STR);
+$stmt->bindParam(':author', $_POST['name'],PDO::PARAM_STR);
+$stmt->bindParam(':create_date',$now ,PDO::PARAM_STR);
+$stmt->bindParam(':update_date',$now ,PDO::PARAM_STR);
+
+// 実 行 ! !
+$stmt->execute();
 ```
-$capsule::insert('INSERT INTO articles
-  (article,author,create_date,update_date) VALUES (?,?,?,?)',[$_POST['article'],$_POST['name'],$now,$now]);
+になります。
+
+
+何も不備が無ければデータベースにデータが格納されています。いえい。
+
+## 表示させなきゃ何の意味もない
+
+ええ。格納されてるだけでは何も意味がありません。
+
+表示もできなければ何もありません。CRUDのRです。
+表示用のプログラムを書いてみましょう。
+
+まずは記事IDが1になっているものを表示してみましょう。
+
+表示用のプログラムとして[view.php](view.php)を用意しました。
+テンプレートは[templates/output.tpl](templates/output.tpl)にあります。
+
+viw.phpの前半部分はadd.phpと同じです。queryがデータを呼び出す時に使う「SELECT」になってます。
+
+
+```php
+// ここからがadd.phpと違うところ。データ呼び出してみるよ!
+$query = 'SELECT id,article,author,create_date,update_date FROM articles WHERE id = :id';
+$stmt = $dbh->prepare($query);
+$stmt->bindValue(":id",1,PDO::PARAM_INT);
+$stmt->execute();
+$data = $stmt->fetch(PDO::FETCH_OBJ);
 ```
-です。
-なぜかデータを入れるVALUESのところが ``VALUES (?,?,?,?)`` になっています。
+
+を実行することでidが1の記事を呼び出し、`$data`の中に記事の情報を格納しています。
+
+取り出したデータをvar_dumpという、変数の中身を表示する関数を使用して確認してみます。
+
+```php
+var_dump($data);
+```
+と実行すると…
+
+…
+
+あとはTwigを使用してデータをはめこめばOKです。
+
+$dataの中から各種情報を取り出す時にはアロー演算子を使用します。
+
+```php
+$data->article
+```
+とやるとarticleの情報を取得することができます。
+
+あとは…ね。
+
+### 課題
+
+input.htmlからいくつか記事を登録して記事IDが2、3、4…の記事を表示をしてみよう。
