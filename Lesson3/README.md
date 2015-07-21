@@ -133,6 +133,9 @@ print('</html>');
 
 さっきのprintてんこもりのPHPファイルを表示の処理とテンプレートに分離してみます。
 
+[Twig](http://twig.sensiolabs.org/)というテンプレートエンジンを使用してやります。
+ダウンロードして、展開し、libディレクトリの中に「twig」というディレクトリ名に置いておいてください。
+
 テンプレートは[こちら](templates/output.tpl)、プログラムは[こちら](twig.php)。
 そして入力のinput.htmlはtwig.phpにデータを送信するように
 
