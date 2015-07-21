@@ -1,5 +1,5 @@
 <?php
-require '../lib/vendor/autoload.php';
+require '../lib/twig/lib/Twig/Autoloader.php';
 
 Twig_Autoloader::register(); // Twigを使う時のおまじない
 $loader = new Twig_Loader_Filesystem('./templates'); // Twigで使用するテンプレートファイルを格納する場所

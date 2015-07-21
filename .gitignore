@@ -4,3 +4,6 @@ vendor/
 Lesson[0-9]/cache/*
 .DS_Store
 tmp
+lib/twig/
+lib/twig.tgz
+lib/package.xml
