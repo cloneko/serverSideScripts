@@ -93,15 +93,14 @@ idはダブっちゃ困るのでこのA_Iを使用して自動的に増やして
 
 #### SQLで書く版
 
-WIP
-
 ```
 CREATE TABLE articles (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `author` TEXT NOT NULL ,
   `article` TEXT NOT NULL ,
   `create_date` DATETIME NOT NULL ,
-  `update_date` DATETIME NOT NULL )
+  `update_date` DATETIME NOT NULL,
+  PRIMARY KEY(id))
    ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 ```
 
