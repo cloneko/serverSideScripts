@@ -91,6 +91,20 @@ idはダブっちゃ困るのでこのA_Iを使用して自動的に増やして
 
 こんなかんじでハコを作ることができます。
 
+#### SQLで書く版
+
+WIP
+
+```
+CREATE TABLE articles (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `author` TEXT NOT NULL ,
+  `article` TEXT NOT NULL ,
+  `create_date` DATE NOT NULL ,
+  `update_date` DATE NOT NULL )
+   ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+```
+
 データを入れてみよう
 ------------------------------
 
