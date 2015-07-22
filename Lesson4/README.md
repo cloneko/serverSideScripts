@@ -100,8 +100,8 @@ CREATE TABLE articles (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `author` TEXT NOT NULL ,
   `article` TEXT NOT NULL ,
-  `create_date` DATE NOT NULL ,
-  `update_date` DATE NOT NULL )
+  `create_date` DATETIME NOT NULL ,
+  `update_date` DATETIME NOT NULL )
    ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 ```
 
