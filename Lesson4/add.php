@@ -10,7 +10,8 @@ $twig = new Twig_Environment($loader, array(
 ));
 
 
-// データを追加してみる…前にデータベースの設定いろいろやる。こ
+// データを追加してみる…前にデータベースの設定いろいろやる。
+// 教科書だと159ページ参照
 $host = 'localhost';
 $dbname = 'blog';
 $charset = 'utf8';
@@ -31,6 +32,7 @@ $stmt = $dbh->prepare($query);
 
 // valuesのそれぞれの場所に値をセットしていく。PDO::PARAM_STRはそれが"文字"だよーっていう意味
 // 整数のデータ入れたい時はPDO::PARAM_INTって入れてね。
+// 教科書だと198ページくらい参照
 $stmt->bindParam(':article', $_POST['article'],PDO::PARAM_STR);
 $stmt->bindParam(':author', $_POST['name'],PDO::PARAM_STR);
 $stmt->bindParam(':create_date',$now ,PDO::PARAM_STR);
@@ -43,3 +45,6 @@ $stmt->execute();
 // templatesディレクトリにある *done.tpl* の {{article}}と{{name}}に受け取ったデータを嵌め込んで表示する
 print($twig->render('done.tpl',
   array('article'=>$_POST['article'],'name'=> $_POST['name'])));
+
+// データベースの接続を終了する
+unset($dbh);
