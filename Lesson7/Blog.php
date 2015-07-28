@@ -8,6 +8,7 @@ class Blog {
     // blogの機能は基本的にデータベースを使用するので、コンストラクターでDBに接続しておく
     $this->dbh = new PDO(CONNECTION,DBUSER,DBPASSWORD);
     $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    return true;
   }
 
   function getArticle($id){
@@ -36,10 +37,11 @@ class Blog {
     $stmt->bindParam(':create_date',$create_date ,PDO::PARAM_STR);
     $stmt->bindParam(':update_date',$update_date ,PDO::PARAM_STR);
     // 実 行 ! !
-    $stmt->execute();
+    return $stmt->execute();
   }
 
   function __destruct(){
     unset($this->dbh);
+    return true;
   }
 }
