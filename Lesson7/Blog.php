@@ -7,7 +7,7 @@
 /**
  * BlogクラスはBlogの記事の取得、すべての記事の取得、記事の追加を行ないます。
  *
- * @todo 編集用のeditArticleクラス、削除用のdeleteArticleクラス
+ * @todo 編集用のupdateArticleクラス、削除用のremoveArticleクラス
  */
 
 class Blog {

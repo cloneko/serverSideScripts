@@ -7,7 +7,7 @@
 /**
  * BlogクラスはBlogの記事の取得、すべての記事の取得、記事の追加を行ないます。
  *
- * @todo 編集用のeditArticleクラス、削除用のdeleteArticleクラス
+ * @todo 編集用のupdateArticleクラス、削除用のremoveArticleクラス
  */
 
 class Blog {
@@ -22,7 +22,7 @@ class Blog {
    *
    * @return true
    */
-  private function __construct(){
+  public function __construct(){
     include_once('config.php');
     // blogの機能は基本的にデータベースを使用するので、コンストラクターでDBに接続しておく
     $this->dbh = new PDO(CONNECTION,DBUSER,DBPASSWORD);
@@ -82,7 +82,7 @@ class Blog {
    *
    * @return true
    */
-  private function __destruct(){
+  public function __destruct(){
     unset($this->dbh);
     return true;
   }
