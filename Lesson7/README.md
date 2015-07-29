@@ -47,7 +47,7 @@ require_onceして機能を呼び出してあげたほうがプログラムも�
 |-------|-------|
 |[add.php](../Lesson6/add.php)|[add.php](../Lesson7/add.php)|
 |[preview.php](../Lesson6/preview.php)|[preview.php](../Lesson7/preview.php)|
-|[list.php](../Lesson6/list.php)|[view.php](../Lesson7/list.php)|
+|[list.php](../Lesson6/list.php)|[list.php](../Lesson7/list.php)|
 |[view.php](../Lesson6/view.php)|[view.php](../Lesson7/view.php)|
 |-------|[Blog.php](../Lesson7/Blog.php)|
 
