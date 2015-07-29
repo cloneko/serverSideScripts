@@ -37,7 +37,7 @@ class Blog {
    * @return Object
    */
   function getArticle($id){
-    $query = 'SELECT id,article,author,create_date,update_date FROM articles WHERE id = :id';
+    $query = 'SELECT id, article, author, create_date, update_date FROM articles WHERE id = :id';
     $stmt = $this->dbh->prepare($query);
     $stmt->bindValue(":id",$id,PDO::PARAM_INT);
     $stmt->execute();
@@ -49,7 +49,7 @@ class Blog {
    * @return Object
    */
   function getArticles(){
-    $query = 'SELECT id,article,author,create_date,update_date FROM articles';
+    $query = 'SELECT id, article, author, create_date, update_date FROM articles';
     $stmt = $this->dbh->prepare($query);
     $stmt->execute();
     // fetchAllを実行すると登録されているすべての情報を配列で返してくれるよ
