@@ -4,8 +4,10 @@ require_once 'Blog.php';
 // セッションはじまり
 session_start();
 
+// blogの機能を使えるようにする
 $blog = new Blog();
-$blog->addArticle($_SESSION['article'],$_SESSION['article'],$_SESSION['create_date'],$_SESSION['create_date'])
+// blogの記事を登録する関数を呼び出す
+$blog->addArticle($_SESSION['article'],$_SESSION['article'],$_SESSION['create_date']);
 
 // あとはTwig使って表示するだけ。
 // templatesディレクトリにある *done.tpl* の {{article}}と{{name}}に受け取ったデータを嵌め込んで表示する

@@ -22,7 +22,7 @@ class Blog {
    *
    * @return true
    */
-  public function __construct(){
+  private function __construct(){
     include_once('config.php');
     // blogの機能は基本的にデータベースを使用するので、コンストラクターでDBに接続しておく
     $this->dbh = new PDO(CONNECTION,DBUSER,DBPASSWORD);
@@ -82,8 +82,9 @@ class Blog {
    *
    * @return true
    */
-  public function __destruct(){
+  private function __destruct(){
     unset($this->dbh);
     return true;
   }
 }
+
